@@ -1,0 +1,19 @@
+version: '3'
+services:
+  vpn:
+    container_name: openconnect-vpn
+    build: .
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
+    cap_add:
+      - SYS_ADMIN
+      - NET_ADMIN
+    devices:
+      - "/dev/net/tun:/dev/net/tun"
+    networks:
+      - openconnect-vpn
+networks:
+  openconnect-vpn:
+    external: true
